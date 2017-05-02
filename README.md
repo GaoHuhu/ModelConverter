@@ -1,2 +1,2 @@
 # ModelConverter
-Convert model to anther model
+Convert model to another model
