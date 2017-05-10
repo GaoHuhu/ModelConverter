@@ -16,25 +16,27 @@ namespace ModelConverter
         [Resume("Description")]
         public string OtherDesc1 { get; set; }
 
-        [Resume("SubRowId")]
-        public string StartTime { get; set; }
+        [ResumeTime(true,"Year,Month")]
+        public long StartTime { get; set; }
 
-        public static Other ChangeType(OtherPG pg)
-        {
-            Other other = new Other();
-            other.SubRowId = pg.StartTime;
-            other.Name = pg.OtherUserdefTitle1;
-            other.Description = pg.OtherDesc1;
-            //other.StartMonth = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1)).AddSeconds(pg.StartTime).Month.ToString();
-            //other.StartYear = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1)).AddSeconds(pg.StartTime).Year.ToString();
-            return other;
-        }
+        //public static Other ChangeType(OtherPG pg)
+        //{
+        //    Other other = new Other();
+        //    other.SubRowId = pg.StartTime;
+        //    other.Name = pg.OtherUserdefTitle1;
+        //    other.Description = pg.OtherDesc1;
+        //    //other.StartMonth = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1)).AddSeconds(pg.StartTime).Month.ToString();
+        //    //other.StartYear = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1)).AddSeconds(pg.StartTime).Year.ToString();
+        //    return other;
+        //}
     }
     public class Other
     {
         public string SubRowId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string Year { get; set; }
+        public string Month { get; set; }
     }
 
     class Program
@@ -56,8 +58,8 @@ namespace ModelConverter
             
             opg.OtherDesc1 = "test";
             opg.OtherUserdefTitle1 = "22233fsdfsdfs";
-            //opg.StartTime = 1493710846;
-            opg.StartTime = "1";
+            opg.StartTime = 1493710846;
+            //opg.StartTime = "1";
 
             Stopwatch stop = new Stopwatch();
             stop.Start();
@@ -67,12 +69,12 @@ namespace ModelConverter
 
             Console.WriteLine(stop.Elapsed);
 
-            stop.Reset();
-            stop.Start();
-            OtherPG.ChangeType(opg);
-            stop.Stop();
+            //stop.Reset();
+            //stop.Start();
+            //OtherPG.ChangeType(opg);
+            //stop.Stop();
 
-            Console.WriteLine(stop.Elapsed);
+            //Console.WriteLine(stop.Elapsed);
 
             Console.WriteLine(type.SubRowId);
             Console.WriteLine(type.Name);

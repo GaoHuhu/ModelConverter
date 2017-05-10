@@ -45,13 +45,13 @@ namespace ModelConverter
                                 string[] fields = attribute.Fields.Split(',');
 
                                 long time = (long)left.GetType().GetProperty(property.Name).GetValue(left);
-                                DateTime dateTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1)).AddSeconds(time);
+                                DateTime dateTime = ConvertLongToDateTiem(time);
 
-                                if(fields.Length==1)
-                                { 
+                                if (fields.Length == 1)
+                                {
                                     t.GetType().GetProperty(fields[0]).SetValue(t, dateTime.Year.ToString());
                                 }
-                                else if(fields.Length==2)
+                                else if (fields.Length == 2)
                                 {
                                     t.GetType().GetProperty(fields[0]).SetValue(t, dateTime.Year.ToString());
                                     t.GetType().GetProperty(fields[1]).SetValue(t, dateTime.Month.ToString());
@@ -63,6 +63,11 @@ namespace ModelConverter
             }
 
             return t;
+        }
+
+        private static DateTime ConvertLongToDateTiem(long time)
+        {
+            return TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1)).AddSeconds(time);
         }
     }
 }
