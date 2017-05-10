@@ -11,13 +11,13 @@ namespace ModelConverter
 {
     public class OtherPG
     {
-        [Resume("Name")]
+        //[Resume("Name")]
         public string OtherUserdefTitle1 { get; set; }
-        [Resume("Description")]
+        //[Resume("Description")]
         public string OtherDesc1 { get; set; }
 
-        [ResumeTime(true,"Year,Month")]
-        public long StartTime { get; set; }
+        //[ResumeTime(true,"Year,Month")]
+        //public long StartTime { get; set; }
 
 
         //public static Other ChangeType(OtherPG pg)
@@ -34,7 +34,9 @@ namespace ModelConverter
     public class Other
     {
         public string SubRowId { get; set; }
+        [Resume("OtherUserdefTitle1")]
         public string Name { get; set; }
+        [Resume("OtherDesc1")]
         public string Description { get; set; }
         public string Year { get; set; }
         public string Month { get; set; }
@@ -55,20 +57,20 @@ namespace ModelConverter
             ////xml1.InnerXml = root.;
             //root.Save(Guid.NewGuid().ToString() +" xe "+ ".xml");
             //xml.Save(Guid.NewGuid().ToString() + " xd " + ".xml");
-            OtherPG opg = new OtherPG();
-            
-            opg.OtherDesc1 = "test";
-            opg.OtherUserdefTitle1 = "22233fsdfsdfs";
-            opg.StartTime = 1493710846;
-            //opg.StartTime = "1";
+            //OtherPG opg = new OtherPG();
 
-            Stopwatch stop = new Stopwatch();
-            stop.Start();
-            ModelService service = new ModelService();
-            Other type = service.BuildModel<Other>(opg);
-            stop.Stop();
+            //opg.OtherDesc1 = "test";
+            //opg.OtherUserdefTitle1 = "22233fsdfsdfs";
+            ////opg.StartTime = 1493710846;
+            ////opg.StartTime = "1";
 
-            Console.WriteLine(stop.Elapsed);
+            //Stopwatch stop = new Stopwatch();
+            //stop.Start();
+            //ModelService service = new ModelService();
+            //Other type = service.BuildModel<Other>(opg);
+            //stop.Stop();
+
+            //Console.WriteLine(stop.Elapsed);
 
             //stop.Reset();
             //stop.Start();
@@ -77,9 +79,23 @@ namespace ModelConverter
 
             //Console.WriteLine(stop.Elapsed);
 
-            Console.WriteLine(type.SubRowId);
-            Console.WriteLine(type.Name);
-            Console.WriteLine(type.Description);
+            Other other = new Other();
+
+            other.Name = "test";
+            other.Description = "22233fsdfsdfs";
+            //opg.StartTime = 1493710846;
+            //opg.StartTime = "1";
+
+            Stopwatch stop = new Stopwatch();
+            stop.Start();
+            ModelService service = new ModelService();
+            OtherPG type = service.BuildModel<OtherPG>(other);
+            stop.Stop();
+
+            Console.WriteLine(stop.Elapsed);
+
+            Console.WriteLine(type.OtherDesc1);
+            Console.WriteLine(type.OtherUserdefTitle1);
 
             Console.ReadKey();
         }
