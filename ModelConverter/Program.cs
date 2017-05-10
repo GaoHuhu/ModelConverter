@@ -19,6 +19,7 @@ namespace ModelConverter
         [ResumeTime(true,"Year,Month")]
         public long StartTime { get; set; }
 
+
         //public static Other ChangeType(OtherPG pg)
         //{
         //    Other other = new Other();
