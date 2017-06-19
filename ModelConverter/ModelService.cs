@@ -9,6 +9,22 @@ namespace ModelConverter
 {
     public class ModelService
     {
+        public T BuildModel<T,V>(T left,V right,Dictionary<string,string> dics)
+        {
+            T type = Activator.CreateInstance<T>();
+            Type t1 = left.GetType();
+            Type t2 = right.GetType();
+            PropertyInfo[] propertiesLeft = t1.GetProperties();
+            foreach (var item in propertiesLeft)
+            {
+                if(dics.Keys.Contains(item.Name))
+                {
+                    type.GetType().GetProperty(item.Name).SetValue(type,t2.GetProperty(dics[item.Name]).GetValue(right));
+                }
+            }
+
+            return type;
+        }
         public T BuildModel<T>(object left) where T : class
         {
             if (left == null)
@@ -38,12 +54,11 @@ namespace ModelConverter
                     else if (type.Name.Equals("ResumeTimeAttribute"))
                     {
                         ResumeTimeAttribute attribute = (ResumeTimeAttribute)att;
+                        string[] fields = attribute.Fields.Split(',');
                         foreach (var attr in properties)
                         {
                             if (attribute.IsTime)
                             {
-                                string[] fields = attribute.Fields.Split(',');
-
                                 long time = (long)left.GetType().GetProperty(property.Name).GetValue(left);
                                 DateTime dateTime = ConvertLongToDateTiem(time);
 
